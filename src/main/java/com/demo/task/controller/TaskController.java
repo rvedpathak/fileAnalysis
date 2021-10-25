@@ -14,6 +14,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class TaskController {
@@ -33,7 +35,7 @@ public class TaskController {
     // 1.1 Create Analysis Task
     @ApiOperation(value = "Create Analysis Task", nickname = "createTask")
     @RequestMapping(path = "/analysis", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.POST)
-    @ResponseBody TaskResult createTask(@RequestBody AnalysisRequest request){
+    @ResponseBody TaskResult createTask(@Valid @RequestBody AnalysisRequest request){
         System.out.println("file id :"+ request.getFileID());
         TaskResult result = taskFacade.createTaskAnalysisTask(request.getFileID());
         return result;
